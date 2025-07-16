@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2P Chat - Real-time Messaging</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-card">
+                <h1>P2P Chat</h1>
+                <p>Join or create a chat room instantly</p>
+                
+                <div class="action-buttons">
+                    <button id="create-room-btn" class="btn btn-primary">
+                        Create Room
+                    </button>
+                    <button id="join-room-btn" class="btn btn-secondary">
+                        Join Room
+                    </button>
+                </div>
+                
+                <div id="room-input-section" class="room-input hidden">
+                    <input type="text" id="room-code-input" placeholder="Enter room code" maxlength="8">
+                    <button id="enter-room-btn" class="btn btn-primary">Enter Room</button>
+                </div>
+                
+                <div id="encryption-section" class="encryption-section hidden">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="enable-encryption">
+                        <span class="checkmark"></span>
+                        Enable end-to-end encryption
+                    </label>
+                    <input type="password" id="encryption-key" placeholder="Encryption key (optional)" class="hidden">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat Screen -->
+        <div id="chat-screen" class="screen">
+            <div class="chat-header">
+                <div class="room-info">
+                    <h2 id="room-title">Room: <span id="current-room-code"></span></h2>
+                    <span id="user-count">1 user online</span>
+                </div>
+                <button id="leave-room-btn" class="btn btn-danger">Leave Room</button>
+            </div>
+            
+            <div class="chat-container">
+                <div id="messages-container" class="messages-container">
+                    <!-- Messages will be dynamically added here -->
+                </div>
+                
+                <div class="message-input-container">
+                    <input type="text" id="message-input" placeholder="Type your message..." maxlength="500">
+                    <button id="send-btn" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="app-footer">
+        <p>Crafted with ❤️ by Hirachand Barik © 2025</p>
+    </footer>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
+    <script src="app.js"></script>
+</body>
+</html>
