@@ -1,14 +1,29 @@
-// Firebase Configuration
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
 const firebaseConfig = {
-    // Replace with your Firebase config
-    apiKey: "your-api-key",
-    authDomain: "your-project.firebaseapp.com",
-    databaseURL: "https://your-project-default-rtdb.firebaseio.com/",
-    projectId: "your-project-id",
-    storageBucket: "your-project.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "your-app-id"
+  apiKey: "AIzaSyAcwMiHYLyvTwBFKEvisT2Ei64LXbJ4650",
+  authDomain: "p2pchat-df24c.firebaseapp.com",
+  databaseURL: "https://p2pchat-df24c-default-rtdb.firebaseio.com",
+  projectId: "p2pchat-df24c",
+  storageBucket: "p2pchat-df24c.appspot.com",
+  messagingSenderId: "377406310647",
+  appId: "1:377406310647:web:18fbf912b487cbf7912bf2"
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Anonymous sign-in
+signInAnonymously(auth)
+  .then(() => {
+    console.log("Signed in anonymously");
+  })
+  .catch((error) => {
+    console.error("Firebase auth error:", error);
+  });
+
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
