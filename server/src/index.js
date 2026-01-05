@@ -455,14 +455,16 @@ app.get('/api/session/:code', sessionApiLimiter, (req, res) => {
   }
 });
 
-// Serve static files from the client build with cache control
+// Serve static files from the client build (only if dist folder exists)
+import { existsSync } from 'fs';
 const clientBuildPath = join(__dirname, '../../client/dist');
-app.use(express.static(clientBuildPath, {
-  etag: false,
-  maxAge: 0,
-  setHeaders: (res, path) => {
-    // Disable caching for HTML files
-    if (path.endsWith('.html')) {
+if (existsSync(clientBuildPath)) {
+  app.use(express.static(clientBuildPath, {
+    etag: false,
+    maxAge: 0,
+    setHeaders: (res, path) => {
+      // Disable caching for HTML files
+      if (path.endsWith('.html')) {
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
       res.setHeader('Pragma', 'no-cache');
       res.setHeader('Expires', '0');
@@ -472,12 +474,13 @@ app.use(express.static(clientBuildPath, {
       res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour
     }
   }
-}));
+  }));
 
-// Serve index.html for all non-API routes (SPA support)
-app.get('*', (req, res) => {
-  res.sendFile(join(clientBuildPath, 'index.html'));
-});
+  // Serve index.html for all non-API routes (SPA support)
+  app.get('*', (req, res) => {
+    res.sendFile(join(clientBuildPath, 'index.html'));
+  });
+}
 
 // Cleanup expired sessions every minute
 setInterval(() => {
